@@ -1,0 +1,39 @@
+<RCC>
+    <qresource prefix="/EternalModManager">
+        <file>Resources/addplugin.png</file>
+        <file>Resources/disableAllPlugins.png</file>
+        <file>Resources/down.png</file>
+        <file>Resources/enableAllPlugins.png</file>
+        <file>Resources/eternity.png</file>
+        <file>Resources/load.png</file>
+        <file>Resources/save.png</file>
+        <file>Resources/skyrim.png</file>
+        <file>Resources/skyrimse.png</file>
+        <file>Resources/up.png</file>
+        <file>Resources/Update.ico</file>
+        <file>Resources/settings.png</file>
+        <file>Resources/plugins.png</file>
+        <file>Resources/mods.png</file>
+        <file>Resources/lanugage.png</file>
+        <file>Resources/rus.png</file>
+        <file>Resources/uk.png</file>
+        <file>Resources/darkTheme.png</file>
+        <file>Resources/defaultTheme.png</file>
+        <file>Resources/close.png</file>
+        <file>Resources/skyrimse2.png</file>
+        <file>Resources/fallout4.png</file>
+        <file>Resources/skyrimle.png</file>
+        <file>Resources/ok.png</file>
+        <file>Resources/folder.png</file>
+        <file>Resources/rescan.png</file>
+        <file>Resources/remove.png</file>
+        <file>Resources/disableMod.png</file>
+        <file>Resources/mod.png</file>
+        <file>Resources/property.ico</file>
+        <file>Resources/file.png</file>
+        <file>Resources/game.png</file>
+        <file>Resources/about.png</file>
+        <file>Resources/eternal.png</file>
+        <file>Resources/eternallogo.png</file>
+    </qresource>
+</RCC>
