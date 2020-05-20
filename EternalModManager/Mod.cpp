@@ -289,19 +289,19 @@ void Mod::enableMod(QString modName)
 					this->copyFileFromData(pathToMod + SLASH + "Data");
 					return;
 				}
-
+				
 				if (mod.fileName() == "data") {
 
 					this->copyFileFromData(pathToMod + SLASH + "data");
 					return;
 				}
-
-				if (modName == modName) {
+				
+				if (modName == mod.fileName()) {
 
 					this->copyFileFromData(pathToMod + SLASH + modName);
 					return;
 				}
-
+				
 				SDir::copyFolder(mod.filePath(), pathToGame_ + SLASH + "Data" + SLASH + mod.fileName());
 			}
 		}
