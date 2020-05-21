@@ -470,9 +470,9 @@ void EternalModManager::recountPlguins()
 {
 	int result = NULL;
 
-	if (settings->getValue("language") == EN) result = QMessageBox::warning(this, RUS("Attention"), RUS("Do you want to replace mod files?"), QMessageBox::Yes | QMessageBox::Cancel);
+	if (settings->getValue("language") == EN) result = QMessageBox::warning(this, RUS("Attention"), RUS("Download order can be changed"), QMessageBox::Yes | QMessageBox::Cancel);
 
-	if (settings->getValue("language") == RU) result = QMessageBox::warning(this, RUS("Внимание!"), RUS("Download order can be changed"), QMessageBox::Yes | QMessageBox::Cancel);
+	if (settings->getValue("language") == RU) result = QMessageBox::warning(this, RUS("Внимание!"), RUS("Порядок загрузки может быть изменен"), QMessageBox::Yes | QMessageBox::Cancel);
 
 	if (result == QMessageBox::Cancel) return;
 	if (result == QMessageBox::Yes) plg->recountPlguins(pathToSkyrimSe_);
@@ -522,6 +522,8 @@ void EternalModManager::setRussianLanguage()
 
 	ui.gameSelectToolButton->setToolTip(RUS("Выбрать игру"));
 	ui.aboutToolButton->setToolTip(RUS("О программе"));
+
+	ui.recountPluginsToolButton->setToolTip(RUS("Пересчитать плагины (порядок загрузки может быть изменен)"));
 }
 
 void EternalModManager::setDarkTheme()
