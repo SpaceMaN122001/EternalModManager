@@ -22,6 +22,7 @@ private:
 	Ui::GameDefinitionForm ui;
 	void setCustomButtonStyle(QToolButton& button, QString imagePath, QString toolTip);
 	QString getPathToGame(QLabel& line, QString parameter1, QString parameter2, QString parameter3, QString parameter4);
+	bool isGameExist(QString pathToGame);
 private slots:
 	void ScanGame();
 	void savePathToGame();

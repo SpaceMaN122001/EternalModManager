@@ -59,6 +59,8 @@ GameDefinition::GameDefinition(QWidget *parent) : QWidget(parent)
 
 		this->setWindowTitle(RUS("Определение игры"));
 	}
+
+	ui.skyrimSeLogoLabel->setPixmap(QPixmap(":/EternalModManager/Resources/skyrimse2.png"));
 }
 
 void GameDefinition::programQuit()
@@ -83,6 +85,14 @@ void GameDefinition::selectPathToSkyrimSE()
 {
 	QString pathToSkyrimSe = QFileDialog::getExistingDirectory(this, tr("Select a folder"));
 	if (pathToSkyrimSe == nullptr) return;
+
+	if (!this->isGameExist(pathToSkyrimSe)) {
+
+		if (SSettings::getKeyValue("Eternal mod manager", "language") == EN) QMessageBox::about(this, RUS("Attention"), RUS("The folder you selected is not Skyrim SE"));
+		if (SSettings::getKeyValue("Eternal mod manager", "language") == RU) QMessageBox::about(this, RUS("Внимание!"), RUS("Выбранная вами папка не является Skyrim SE"));
+
+		return;
+	}
 
 	ui.okPushButton->setEnabled(true);
 
@@ -109,7 +119,7 @@ QString GameDefinition::getPathToGame(QLabel& line, QString parameter1, QString 
 	{
 
 		//QDirIterator it(info.path(), QDirIterator::Subdirectories);
-		QDirIterator it("D:\\Games", QDirIterator::Subdirectories);
+		QDirIterator it(info.filePath(), QDirIterator::Subdirectories);
 
 		while (it.hasNext()) {
 
@@ -137,10 +147,48 @@ QString GameDefinition::getPathToGame(QLabel& line, QString parameter1, QString 
 			line.setText(info.absolutePath());
 			line.repaint();
 			ui.progressBarSkyrimSe->repaint();
+			this->repaint();
 		}
 	}
 
 	return "Not found";
+}
+
+bool GameDefinition::isGameExist(QString pathToGame)
+{
+	QDir dir(pathToGame);
+
+	QFileInfoList modList = dir.entryInfoList();
+
+	int i = NULL;
+
+	foreach(QFileInfo mod, modList)
+	{
+		if (mod.suffix() != nullptr && mod.fileName() != ".." && mod.fileName() != '.') {
+
+			
+			if (mod.fileName() == "SkyrimSELauncher.exe") {
+				qDebug() << mod.fileName() << endl;
+				i++;
+			}
+
+			if (mod.fileName() == "SkyrimSE.exe") {
+				qDebug() << mod.fileName() << endl;
+				i++;
+			}
+
+			if (mod.fileName() == "unins000.exe") {
+				qDebug() << mod.fileName() << endl;
+				i++;
+			}
+
+		}
+	}
+
+	qDebug() << i << endl;
+	if (i >= 2) return true;
+
+	return false;
 }
 
 void GameDefinition::setCustomButtonStyle(QToolButton& button, QString imagePath, QString toolTip)
