@@ -525,3 +525,32 @@ void Plugin::removePlugin(QString pluginName)
 		delete[] pluginArray;
 	}
 }
+
+void Plugin::recountPlguins(QString pathToGame)
+{
+	QFile file(this->getPathToPluginListSkyrimSe() + this->getPluginListFileName());
+
+	QFile::remove(this->getPathToPluginListSkyrimSe() + this->getPluginListFileName());
+
+	file.open(QIODevice::WriteOnly);
+	file.write("# This file is used by Skyrim to keep track of your downloaded content.\n");
+	file.write("# Please do not modify this file.\n");
+	file.close();
+
+	QDir dir(pathToGame + "\\" + "Data");
+
+	QFileInfoList modList = dir.entryInfoList();
+
+	foreach(QFileInfo mod, modList)
+	{
+		if (mod.suffix() != nullptr && mod.fileName() != ".." && mod.fileName() != '.') {
+
+			if (mod.suffix() == "esp") {
+
+				this->addPlugin(mod.fileName());
+			}
+		}
+	}
+
+	this->showPluginList();
+}

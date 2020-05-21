@@ -138,6 +138,13 @@
            </widget>
           </item>
           <item>
+           <widget class="QToolButton" name="recountPluginsToolButton">
+            <property name="text">
+             <string>RECOUNT</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QToolButton" name="uploadFileDownloadOrderTtoolButton">
             <property name="text">
              <string>LOAD</string>

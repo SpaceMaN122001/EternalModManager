@@ -67,4 +67,5 @@ private slots:
 	void closePorgramAfterLaunch();
 	void gameSelect();
 	void aboutProgram();
+	void recountPlguins();
 };

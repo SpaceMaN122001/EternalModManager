@@ -35,5 +35,6 @@
         <file>Resources/about.png</file>
         <file>Resources/eternal.png</file>
         <file>Resources/eternallogo.png</file>
+        <file>Resources/discharge.png</file>
     </qresource>
 </RCC>

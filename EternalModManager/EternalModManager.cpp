@@ -24,6 +24,7 @@ EternalModManager::EternalModManager(QWidget *parent)
 	setCustomButtonStyle(*ui.rescanGameToolButton, ":/EternalModManager/Resources/rescan.png", "Rescan installed games");
 	setCustomButtonStyle(*ui.gameSelectToolButton, ":/EternalModManager/Resources/game.png", "Game select");
 	setCustomButtonStyle(*ui.aboutToolButton, ":/EternalModManager/Resources/about.png", "About program");
+	setCustomButtonStyle(*ui.recountPluginsToolButton, ":/EternalModManager/Resources/discharge.png", "Recount plugins (The list of plugins will be changed)");
 
 	ui.mainTabWidget->setTabIcon(2, QIcon(":/EternalModManager/Resources/settings.png"));
 	ui.mainTabWidget->setTabIcon(0, QIcon(":/EternalModManager/Resources/plugins.png"));
@@ -66,6 +67,7 @@ EternalModManager::EternalModManager(QWidget *parent)
 	connect(ui.closeProgramAfterLaunchGameCheckBox, SIGNAL(clicked()), this, SLOT(closePorgramAfterLaunch()));
 	connect(ui.gameSelectToolButton, SIGNAL(clicked()), this, SLOT(gameSelect()));
 	connect(ui.aboutToolButton, SIGNAL(clicked()), this, SLOT(aboutProgram()));
+	connect(ui.recountPluginsToolButton, SIGNAL(clicked()), this, SLOT(recountPlguins()));
 	QTextCodec::setCodecForLocale(QTextCodec::codecForName("Windows-1251"));
 
 	plg = new Plugin(ui.pluginListWidget);
@@ -278,7 +280,8 @@ void EternalModManager::uploadFileDownloadOrder()
 
 	if (fileInfo.fileName() != "Plugins.txt") {
 
-		QMessageBox::about(this, "Error!", "The file must have a name Plugin.txt");
+		if(settings->getValue("language") == EN) QMessageBox::about(this, "Error!", "The file must have a name Plugin.txt");
+		if(settings->getValue("language") == RU) QMessageBox::about(this, "Ошибка!", "Выберите файл с именем Plugin.txt");
 
 		return;
 	}
@@ -461,6 +464,18 @@ void EternalModManager::aboutProgram()
 	AboutProgram* about = new AboutProgram;
 	about->setAttribute(Qt::WA_DeleteOnClose);
 	about->show();
+}
+
+void EternalModManager::recountPlguins()
+{
+	int result = NULL;
+
+	if (settings->getValue("language") == EN) result = QMessageBox::warning(this, RUS("Attention"), RUS("Do you want to replace mod files?"), QMessageBox::Yes | QMessageBox::Cancel);
+
+	if (settings->getValue("language") == RU) result = QMessageBox::warning(this, RUS("Внимание!"), RUS("Download order can be changed"), QMessageBox::Yes | QMessageBox::Cancel);
+
+	if (result == QMessageBox::Cancel) return;
+	if (result == QMessageBox::Yes) plg->recountPlguins(pathToSkyrimSe_);
 }
 
 void EternalModManager::setRussianLanguage()

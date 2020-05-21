@@ -27,6 +27,7 @@ public:
 	void saveBootOrderFile(QString pathToFile);
 	static void addPlugin(QString pluginName);
 	void removePlugin(QString pluginName);
+	void recountPlguins(QString pathToGame);
 private:
 	QListWidget* widget_;
 	QString* getPluginList();
