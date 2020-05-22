@@ -3,6 +3,8 @@
 EternalModManager::EternalModManager(QWidget *parent)
 	: QMainWindow(parent)
 {
+	QTextCodec::setCodecForLocale(QTextCodec::codecForName("Windows-1251"));
+
 	ui.setupUi(this);
 	ui.applySettingsPushButton->setEnabled(false);
 	ui.defaultSettingsPushButton->setEnabled(false);
@@ -68,7 +70,6 @@ EternalModManager::EternalModManager(QWidget *parent)
 	connect(ui.gameSelectToolButton, SIGNAL(clicked()), this, SLOT(gameSelect()));
 	connect(ui.aboutToolButton, SIGNAL(clicked()), this, SLOT(aboutProgram()));
 	connect(ui.recountPluginsToolButton, SIGNAL(clicked()), this, SLOT(recountPlguins()));
-	QTextCodec::setCodecForLocale(QTextCodec::codecForName("Windows-1251"));
 
 	plg = new Plugin(ui.pluginListWidget);
 	updatePluginsInfo();
@@ -191,6 +192,16 @@ void EternalModManager::disableMod()
 
 void EternalModManager::enableMod()
 {
+	ModManager* manager = new ModManager;
+
+	if (manager->getStatusWhetherModIsAvailableForInstallation(selectedMod_)) {
+
+		ModInstalling* install = new ModInstalling(selectedMod_);
+		install->setAttribute(Qt::WA_DeleteOnClose);
+		install->show();
+		return;
+	}
+
 	mod->enableMod(selectedMod_);
 	mod->showMods();
 

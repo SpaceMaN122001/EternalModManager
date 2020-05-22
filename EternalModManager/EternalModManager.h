@@ -17,6 +17,8 @@
 #include "KeyWords.h"
 #include "GameSelection.h"
 #include "AboutProgram.h"
+#include "ModInstalling.h"
+#include "ModManager.h"
 
 class EternalModManager : public QMainWindow
 {
