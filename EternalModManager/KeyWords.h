@@ -12,3 +12,4 @@
 #define SKSE64 60526046
 #define ON 8887
 #define OFF 887979
+#define SNULL ""
